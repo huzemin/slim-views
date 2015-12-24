@@ -1,7 +1,7 @@
 <?php
 /**
  * Smarty 模板引擎在Slim Framework中的使用
- * @author huzemin<huzemin8@126.com>
+ * @author huzemin <huzemin8@126.com>
  * 参考：https://github.com/slimphp/Twig-View
  */
 namespace Slim\Views;
@@ -57,7 +57,8 @@ class SmartyView implements \ArrayAccess, \Countable, \IteratorAggregate
      * @param array $data
      * @return string
      */
-    public function fetch($template, $data = array()) {
+    public function fetch($template, $data = array())
+    {
         $data = array_merge($this->defaultVariables, $data);
         $this->smartyInstance->assign($data);
         return $this->smartyInstance->fetch($template);
@@ -68,7 +69,8 @@ class SmartyView implements \ArrayAccess, \Countable, \IteratorAggregate
      * @param $template
      * @param array $data
      */
-    public function display($template, $data = array()) {
+    public function display($template, $data = array())
+    {
         $data = array_merge($this->defaultVariables, $data);
         $this->smartyInstance->assign($data);
         $this->smartyInstance->display($template);
@@ -89,7 +91,8 @@ class SmartyView implements \ArrayAccess, \Countable, \IteratorAggregate
         return $this->smartyInstance;
     }
 
-    public function addExtionsions(Container $c, $extensions = array()) {
+    public function addExtionsions(Container $c, $extensions = array())
+    {
         $this->smartyInstance->registerObject('Container', $c);
         if(is_array($extensions)) {
             foreach($extensions as $ext) {

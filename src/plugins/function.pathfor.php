@@ -1,10 +1,10 @@
 <?php
-/*
+/**
  * Smarty Plugin
  * -----------------------------------------------
  * 通过路由名称获取相对链接
  *------------------------------------------------
- * @author huzemin<huzemin8@126.com>
+ * @author huzemin <huzemin8@126.com>
  */
 
 function smarty_function_pathFor($params, $smarty)

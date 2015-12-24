@@ -5,8 +5,10 @@
  * 参考：https://github.com/slimphp/Twig-View
  */
 namespace Slim\Views;
+
 use \Slim\Http\Response;
 use \Slim\Container;
+
 class SmartyView implements \ArrayAccess, \Countable, \IteratorAggregate
 {
     /**
@@ -23,29 +25,30 @@ class SmartyView implements \ArrayAccess, \Countable, \IteratorAggregate
      * 默认变量
      * @var array
      */
-    private $defaultVariables  = array();
+    private $defaultVariables = array();
 
     public function __construct($config = array())
     {
-        if(!($this->smartyInstance instanceof \Smarty)) {
-            if(!class_exists('\Smarty')) {
-                if(!empty($config['smartyDir'])
-                    && !is_dir($config['smartyDir'])) {
-                throw new \RuntimeException('Cannot set the Smarty lib directory : '
-                    . $config['smartyDir'] . '. Directory does not exist.');
+        if (!($this->smartyInstance instanceof \Smarty)) {
+            if (!class_exists('\Smarty')) {
+                if (!empty($config['smartyDir'])
+                    && !is_dir($config['smartyDir'])
+                ) {
+                    throw new \RuntimeException('Cannot set the Smarty lib directory : '
+                        . $config['smartyDir'] . '. Directory does not exist.');
                 }
             }
             $this->smartyInstance = new \Smarty();
-            if(!empty($config['templateDir'])) {
+            if (!empty($config['templateDir'])) {
                 $this->smartyInstance->setTemplateDir($config['templateDir']);
             }
-            if(!empty($config['cacheDir'])) {
+            if (!empty($config['cacheDir'])) {
                 $this->smartyInstance->setCacheDir($config['cacheDir']);
             }
-            if(!empty($config['complieDir'])) {
+            if (!empty($config['complieDir'])) {
                 $this->smartyInstance->setCompileDir($config['complieDir']);
             }
-            if(!empty($config['configDir'])) {
+            if (!empty($config['configDir'])) {
                 $this->smartyInstance->setConfigDir($config['configDir']);
             }
         }
@@ -87,16 +90,17 @@ class SmartyView implements \ArrayAccess, \Countable, \IteratorAggregate
         return $this->render($response, $template, $args);
     }
 
-    public function getSmartyInstance() {
+    public function getSmartyInstance()
+    {
         return $this->smartyInstance;
     }
 
     public function addExtionsions(Container $c, $extensions = array())
     {
         $this->smartyInstance->registerObject('Container', $c);
-        if(is_array($extensions)) {
-            foreach($extensions as $ext) {
-                if(is_dir($ext)) {
+        if (is_array($extensions)) {
+            foreach ($extensions as $ext) {
+                if (is_dir($ext)) {
                     $this->smartyInstance->addPluginsDir(realpath($ext));
                 } else {
                     $this->registerExtension($ext);
@@ -110,34 +114,38 @@ class SmartyView implements \ArrayAccess, \Countable, \IteratorAggregate
      * @param $file
      * @return bool
      */
-    public function isPHPFile($file) {
+    public function isPHPFile($file)
+    {
         return pathinfo($file, PATHINFO_EXTENSION) == 'php' ? true : false;
     }
 
-    public function getExtensionParams($file, $split = '.') {
+    public function getExtensionParams($file, $split = '.')
+    {
         $filename = basename($file);
         $_params = explode($split, $filename);
         $params = array();
-        if(count($_params) == 3) {
+        if (count($_params) == 3) {
             $params['type'] = strtolower($_params[0]);
             $params['name'] = $_params[1];
-            $params['callback'] = 'smarty_function_'. $params['name'];
+            $params['callback'] = 'smarty_function_' . $params['name'];
             return $params;
         }
         return null;
     }
+
     public function registerExtension($file)
     {
-        if(is_file($file) && $this->isPHPFile($file)) {
+        if (is_file($file) && $this->isPHPFile($file)) {
             $params = $this->getExtensionParams($file);
-            if($params) {
+            if ($params) {
                 require_once $file;
-                if(function_exists($params['callback'])) {
-                    $this->smartyInstance->registerPlugin($params['type'],$params['name'],$params['callback']);
+                if (function_exists($params['callback'])) {
+                    $this->smartyInstance->registerPlugin($params['type'], $params['name'], $params['callback']);
                 }
             }
         }
     }
+
     public function offsetExists($key)
     {
         return array_key_exists($key, $this->defaultVariables);

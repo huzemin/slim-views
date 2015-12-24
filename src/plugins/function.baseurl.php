@@ -10,7 +10,7 @@
 function smarty_function_baseUrl($params, $smarty)
 {
     $container = $smarty->getRegisteredObject('Container');
-    if(isset($container) && $container instanceof \Slim\Container) {
+    if (isset($container) && $container instanceof \Slim\Container) {
         return $container->request->getUri();
     }
 }

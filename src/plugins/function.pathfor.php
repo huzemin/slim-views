@@ -44,7 +44,7 @@ function smarty_function_pathFor($params, $smarty)
         }
     }
     $container = $smarty->getRegisteredObject('Container');
-    if(isset($container) && $container instanceof \Slim\Container) {
+    if (isset($container) && $container instanceof \Slim\Container) {
         return $container->router->pathFor($name, $data, $queryParams);
     }
     return '';

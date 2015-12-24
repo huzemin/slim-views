@@ -1,0 +1,22 @@
+{
+    "name": "huzemin/slim-views",
+    "description": "Smarty template enigine for Slim Framework 3.x",
+    "keywords": ["Slim view","smarty","view","template"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "huzemin",
+            "email": "huzemin8@126.com"
+        }
+    ],
+    "minimum-stability": "beta",
+    "require": {
+        "php": ">=5.5",
+        "smarty/smarty": "~3.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Slim\\Views": "src"
+        }
+    }
+}

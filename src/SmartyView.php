@@ -45,8 +45,8 @@ class SmartyView implements \ArrayAccess, \Countable, \IteratorAggregate
             if (!empty($config['cacheDir'])) {
                 $this->smartyInstance->setCacheDir($config['cacheDir']);
             }
-            if (!empty($config['complieDir'])) {
-                $this->smartyInstance->setCompileDir($config['complieDir']);
+            if (!empty($config['compileDir'])) {
+                $this->smartyInstance->setCompileDir($config['compileDir']);
             }
             if (!empty($config['configDir'])) {
                 $this->smartyInstance->setConfigDir($config['configDir']);

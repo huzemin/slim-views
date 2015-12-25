@@ -51,6 +51,24 @@ class SmartyView implements \ArrayAccess, \Countable, \IteratorAggregate
             if (!empty($config['configDir'])) {
                 $this->smartyInstance->setConfigDir($config['configDir']);
             }
+            if(!empty($config['caching'])) {
+                $this->smartyInstance->caching = $config['caching'];
+            }
+            if(!empty($config['compile_check'])) {
+                $this->smartyInstance->compile_check = $config['compile_check'];
+            }
+            if(!empty($config['cache_lifetime'])) {
+                $this->smartyInstance->cache_lifetime = $config['cache_lifetime'];
+            }
+            if(!empty($config['debugging'])) {
+                $this->smartyInstance->debugging = $config['debugging'];
+            }
+            if(!empty($config['left_delimiter'])) {
+                $this->smartyInstance->left_delimiter = $config['left_delimiter'];
+            }
+            if(!empty($config['right_delimiter'])) {
+                $this->smartyInstance->right_delimiter = $config['right_delimiter'];
+            }
         }
     }
 

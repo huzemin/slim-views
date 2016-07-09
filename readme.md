@@ -9,7 +9,8 @@ slim-views
 
 ## 使用
 
-```php
+```
+
 $smarty_config = array(
     'templateDir' => 'templateDir',
     'compileDir' => 'compileDir'',
@@ -19,6 +20,7 @@ $smarty_config = array(
         ...
     )
 );
+
 use \Slim\Views\SmartyView as View;
 
 // Setup Slim Framework
